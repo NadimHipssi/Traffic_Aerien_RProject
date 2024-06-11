@@ -2,23 +2,20 @@ library(shiny)
 library(DT)
 library(leaflet)
 
+# Inclure les fichiers UI
+source("accueil.R")
+source("familiarisation.R")
+source("traffic_peak.R")
+source("delays.R")
+source("retard_distance.R")
+source("vols_annules.R")
+source("calcul_duree.R")
+source("geospatial_data.R")
+
 # Interface Utilisateur
 ui <- fluidPage(
   navbarPage("AIR TRAFFIC",
-             tabPanel("Accueil",
-                      h1("TRAFFIC AÉRIEN"),
-                      p("Le projet comporte une liste progressive et détaillée de questions qui permet de monter progressivement en compétence."),
-                      p("Vous pouvez naviguer entre les différents onglets pour visualiser les données et les graphiques :"),
-                      tags$ul(
-                        tags$li("Aéroports : Affiche les données des aéroports et une carte interactive des aéroports."),
-                        tags$li("Compagnies : Affiche les données des compagnies aériennes."),
-                        tags$li("Météo : Affiche les données météorologiques."),
-                        tags$li("Avions : Affiche les données des avions."),
-                        tags$li("Vols : Affiche les données des vols."),
-                        tags$li("Graphiques : Affiche des graphiques personnalisés des données des vols."),
-                        tags$li("Réponses aux questions : Affiche les réponses aux questions du projet.")
-                      )
-             ),
+             accueilUI(),
              tabPanel("Aéroports",
                       h2("Données des Aéroports"),
                       dataTableOutput("airports_table"),
@@ -45,8 +42,19 @@ ui <- fluidPage(
                       plotOutput("custom_plot")
              ),
              tabPanel("Réponses aux questions",
-                      h2("Réponses aux questions"),
-                      uiOutput("responses")
+                      tabsetPanel(
+                        familiarisationUI(),
+                        tabPanel("Pic de trafic aéroportuaire",
+                                 uiOutput("traffic_peak_ui")
+                        ),
+                        tabPanel("Retard à l’arrivée et/ou au départ",
+                                 uiOutput("delays_ui")
+                        ),
+                        retardDistanceUI(),
+                        volsAnnulesUI(),
+                        calculDureeUI(),
+                        geospatialDataUI()  
+                      )
              )
   )
 )
