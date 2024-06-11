@@ -106,3 +106,67 @@ sort_by_speed <- function(flights) {
     shortest_flight = datatable(shortest_flight)
   )
 }
+
+delaysUI <- function() {
+  tabPanel("Retard à l’arrivée et/ou au départ",
+           tagList(
+             h3("Retard à l’arrivée et/ou au départ"),
+             h4("1. Vols les plus retardés"),
+             dataTableOutput("most_delayed_arrival"),
+             dataTableOutput("most_delayed_departure"),
+             dataTableOutput("most_delayed_both"),
+             
+             h4("2. Retard moyen au départ"),
+             textOutput("overall_avg_dep_delay"),
+             dataTableOutput("daily_avg_dep_delay"),
+             
+             h4("3. Vols arrivés avec plus de 2 heures de retard, mais partis à l’heure"),
+             dataTableOutput("flights_2hr_delay"),
+             dataTableOutput("flights_no_2hr_delay"),
+             
+             h4("4. Vols partis ou arrivés plus tôt que prévu"),
+             dataTableOutput("early_departure"),
+             dataTableOutput("early_arrival"),
+             
+             h4("5. Vols partis avec une heure de retard ou plus, mais ayant rattrapé plus de 30 minutes"),
+             dataTableOutput("catch_up_flights"),
+             
+             h4("6. Gain par heure"),
+             dataTableOutput("gain_per_hour"),
+             
+             h4("7. Trier les vols selon leur vitesse"),
+             dataTableOutput("flights_speed"),
+             dataTableOutput("longest_flight"),
+             dataTableOutput("shortest_flight")
+           )
+  )
+}
+
+# Serveur pour l'onglet Retard à l’arrivée et/ou au départ
+delaysServer <- function(input, output, session, flights) {
+  delayed_flights <- most_delayed_flights(flights)
+  output$most_delayed_arrival <- renderDataTable({ delayed_flights$delayed_arrival })
+  output$most_delayed_departure <- renderDataTable({ delayed_flights$delayed_departure })
+  output$most_delayed_both <- renderDataTable({ delayed_flights$delayed_both })
+  
+  avg_delay <- average_departure_delay(flights)
+  output$overall_avg_dep_delay <- renderText({ avg_delay$overall_avg_delay })
+  output$daily_avg_dep_delay <- renderDataTable({ avg_delay$daily_avg_delay })
+  
+  two_hr_delay <- two_hour_delay(flights)
+  output$flights_2hr_delay <- renderDataTable({ two_hr_delay$flights_2hr_delay })
+  output$flights_no_2hr_delay <- renderDataTable({ two_hr_delay$flights_no_2hr_delay })
+  
+  early_flight <- early_flights(flights)
+  output$early_departure <- renderDataTable({ early_flight$early_departure })
+  output$early_arrival <- renderDataTable({ early_flight$early_arrival })
+  
+  output$catch_up_flights <- renderDataTable({ catch_up_flights(flights) })
+  
+  output$gain_per_hour <- renderDataTable({ calculate_gain_per_hour(flights) })
+  
+  sorted_flights <- sort_by_speed(flights)
+  output$flights_speed <- renderDataTable({ sorted_flights$flights_speed })
+  output$longest_flight <- renderDataTable({ sorted_flights$longest_flight })
+  output$shortest_flight <- renderDataTable({ sorted_flights$shortest_flight })
+}

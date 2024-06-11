@@ -4,6 +4,21 @@ library(DT)
 
 # Définir les fonctions pour les réponses
 
+
+# Fonction pour transformer les colonnes de temps en datetime et les supprimer ensuite
+transform_datetime <- function(flights) {
+  flights <- flights %>%
+    mutate(
+      sched_dep_time = make_datetime(year, month, day, hour, minute),
+      dep_time = make_datetime(year, month, day, dep_time %/% 100, dep_time %% 100),
+      arr_time = make_datetime(year, month, day, arr_time %/% 100, arr_time %% 100),
+      sched_arr_time = make_datetime(year, month, day, sched_arr_time %/% 100, sched_arr_time %% 100)
+    ) %>%
+    select(-year, -month, -day, -hour, -minute)
+  return(flights)
+}
+
+
 # 1. Combien y-a-t-il :
 total_airports <- function(airports) {
   paste("Total d'aéroports :", nrow(airports))

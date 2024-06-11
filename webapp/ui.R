@@ -37,10 +37,6 @@ ui <- fluidPage(
                       h2("Données des Vols"),
                       dataTableOutput("flights_table")
              ),
-             tabPanel("Graphiques",
-                      h2("Graphiques des Données"),
-                      plotOutput("custom_plot")
-             ),
              tabPanel("Réponses aux questions",
                       tabsetPanel(
                         familiarisationUI(),
@@ -53,7 +49,7 @@ ui <- fluidPage(
                         retardDistanceUI(),
                         volsAnnulesUI(),
                         calculDureeUI(),
-                        geospatialDataUI()  
+                        geospatialDataUI()
                       )
              )
   )

@@ -40,5 +40,79 @@ familiarisationUI <- function() {
 }
 
 familiarisationServer <- function(input, output, session, airports, flights, planes, weather, airlines) {
-  # Code de traitement et de rendu pour les questions de familiarisation
+  # Les fonctions associées doivent être définies dans "responses.R"
+  output$counts <- renderText({
+    paste(total_airports(airports), "\n",
+          no_dst_airports(airports), "\n",
+          time_zones(airports), "\n",
+          counts(airlines, planes, flights))
+  })
+  
+  output$busiest_departure <- renderText({
+    busiest_departure(flights)
+  })
+  
+  output$top_10_destinations <- renderDataTable({
+    top_10_destinations(flights)
+  })
+  
+  output$bottom_10_destinations <- renderDataTable({
+    bottom_10_destinations(flights)
+  })
+  
+  output$company_destinations <- renderDataTable({
+    company_destinations(flights)
+  })
+  
+  output$company_origin_destinations <- renderDataTable({
+    company_origin_destinations(flights)
+  })
+  
+  output$company_destinations_plot <- renderPlot({
+    company_destinations_plot(flights)
+  })
+  
+  output$company_origin_destinations_plot <- renderPlot({
+    company_origin_destinations_plot(flights)
+  })
+  
+  output$flights_to_houston <- renderText({
+    flights_to_houston(flights)
+  })
+  
+  output$nyc_to_seattle <- renderText({
+    nyc_to_seattle(flights)
+  })
+  
+  output$seattle_companies <- renderText({
+    seattle_companies(flights)
+  })
+  
+  output$seattle_planes <- renderText({
+    seattle_planes(flights)
+  })
+  
+  output$flights_by_destination <- renderDataTable({
+    flights_by_destination(flights, airports)
+  })
+  
+  output$incomplete_companies <- renderDataTable({
+    incomplete_companies(flights)
+  })
+  
+  output$complete_companies <- renderDataTable({
+    complete_companies(flights)
+  })
+  
+  output$orig_dest_by_company <- renderDataTable({
+    orig_dest_by_company(flights)
+  })
+  
+  output$exclusive_destinations <- renderDataTable({
+    exclusive_destinations(flights)
+  })
+  
+  output$specific_company_flights <- renderDataTable({
+    specific_company_flights(flights)
+  })
 }
