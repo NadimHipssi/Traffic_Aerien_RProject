@@ -1,0 +1,22 @@
+Importer les Données : Charger les fichiers CSV et JSON dans des DataFrames pandas.
+
+Nettoyage de la Table flights :
+
+Supprimer les lignes avec des valeurs nulles pour les clés primaires.
+Supprimer les doublons basés sur les clés primaires.
+Nettoyage des Tables airports, planes, et weather :
+
+Supprimer les lignes avec des valeurs nulles dans les colonnes clés (faa pour airports, tailnum pour planes, origin pour weather).
+Supprimer les doublons basés sur les colonnes clés respectives.
+Vérification et Cohérence :
+
+Identifier les tailnum manquants dans planes.
+Identifier les aéroports d'origine et de destination manquants dans airports.
+Ajouter les aéroports manquants à airports.
+Ajout de Clés Artificielles :
+
+Ajouter une colonne id unique à la table flights.
+Sauvegarder les Données Nettoyées :
+
+Sauvegarder les DataFrames nettoyés en fichiers CSV.
+Sauvegarder les données JSON formatées correctement.
