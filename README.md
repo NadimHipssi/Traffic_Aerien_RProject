@@ -42,7 +42,7 @@ The `clean.ipynb` script cleans and prepares the dataset for SQL database inject
 
 ### Database Dump
 
-In the `dump_database` folder, there is a file named `aeroport_db.sql`. This file contains SQL commands to create and populate the database with cleaned data. It includes the schema and data for the following five tables:
+In the `dump_database` folder, there is a file named `traffic_aerien_db.sql`. This file contains SQL commands to create and populate the database with cleaned data. It includes the schema and data for the following five (cleaned) tables:
 
 1. **Flights**
 2. **Airports**
