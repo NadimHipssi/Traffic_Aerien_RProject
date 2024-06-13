@@ -42,15 +42,38 @@ str(flights_model)
 # Diviser les données en ensembles d'entraînement et de test
 set.seed(123)
 trainIndex <- createDataPartition(flights_model$arr_delay_binary, p = .8, list = FALSE, times = 1)
-flightsTrain <- flights_model[trainIndex,]
-flightsTest <- flights_model[-trainIndex,]
+flightsTrain <- flights[1:1000,]
+flightsTest <- flights[1:1000,]
 
-# Entraîner un modèle de régression logistique
-model <- train(arr_delay_binary ~ ., data = flightsTrain, method = "glm", family = binomial)
+# Utiliser la fonction glm directement pour entraîner le modèle
+print("Starting model training with glm...")
+model <- glm(arr_delay_binary ~ ., data = flightsTrain, family = binomial)
+print("Model training completed with glm.")
+
+# Afficher le modèle entraîné
+summary(model)
 
 # Prédire sur l'ensemble de test
-predictions <- predict(model, newdata = flightsTest)
+predictions <- predict(model, newdata = flightsTest, type = "response")
+predictions <- ifelse(predictions > 0.5, 1, 0)
 
 # Évaluer le modèle
-confusionMatrix(predictions, flightsTest$arr_delay_binary)
+conf_matrix <- confusionMatrix(as.factor(predictions), as.factor(flightsTest$arr_delay_binary))
+
+# Afficher la matrice de confusion
+print(conf_matrix)
+
+# Sauvegarder le modèle dans un répertoire spécifique
+if (!dir.exists("models")) {
+  dir.create("models")
+}
+
+file_path <- "GitHub/Traffic_Aerien_RProject/models/flight_delay_model_glm.rds"
+saveRDS(model, file = file_path)
+
+# Charger le modèle depuis le fichier .rds
+loaded_model <- readRDS(file_path)
+
+# Afficher le modèle chargé pour vérification
+print(loaded_model)
 
