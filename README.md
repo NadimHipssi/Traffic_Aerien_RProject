@@ -120,8 +120,5 @@ L'application est divisée en plusieurs onglets, chacun se concentrant sur un as
   - `clean.ipynb` : Nettoyage des données.
   - `EDA.ipynb` : Visualisation des données via Pandas.
   - `Flight_Data_Analysis.ipynb` : Analyse des données via Spark.
-- **WebApp** : 
-  - Dans le dossier `WebApp`
-  - Code en R
 - **Script de nettoyage** : `data/clean/cleaning.txt` explique les étapes de nettoyage.
-- **Code de l'application Web** : Dossier `WebApp` contenant le code en R pour la webapp.
+- **WebApp** : Dossier `WebApp` contenant le code en R pour la webapp.
