@@ -9,8 +9,8 @@ accueilUI <- function() {
              tags$li("Météo : Affiche les données météorologiques."),
              tags$li("Avions : Affiche les données des avions."),
              tags$li("Vols : Affiche les données des vols."),
-             tags$li("Graphiques : Affiche des graphiques personnalisés des données des vols."),
-             tags$li("Réponses aux questions : Affiche les réponses aux questions du projet.")
+             tags$li("Réponses aux questions : Affiche les réponses aux questions du projet."),
+             tags$li("Prediction : Utilise un modèle prédictif pour estimer si un vol sera en retard.")
            )
   )
 }

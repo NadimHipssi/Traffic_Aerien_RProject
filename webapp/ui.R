@@ -2,7 +2,7 @@ library(shiny)
 library(DT)
 library(leaflet)
 
-# Inclure les fichiers UI
+source("prediction.R")
 source("accueil.R")
 source("familiarisation.R")
 source("traffic_peak.R")
@@ -12,7 +12,6 @@ source("vols_annules.R")
 source("calcul_duree.R")
 source("geospatial_data.R")
 
-# Interface Utilisateur
 ui <- fluidPage(
   navbarPage("AIR TRAFFIC",
              accueilUI(),
@@ -51,6 +50,8 @@ ui <- fluidPage(
                         calculDureeUI(),
                         geospatialDataUI()
                       )
-             )
+             ),
+             tabPanel("Prediction",
+                      predictionUI())
   )
 )

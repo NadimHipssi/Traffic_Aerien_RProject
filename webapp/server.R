@@ -1,4 +1,11 @@
-# Charger les fonctions de réponses
+library(shiny)
+library(jsonlite)
+library(lubridate)
+library(dplyr)
+library(DT)
+library(leaflet)
+
+source("prediction.R")
 source("responses.R")
 source("traffic_peak.R")
 source("delays.R")
@@ -7,19 +14,19 @@ source("vols_annules.R")
 source("calcul_duree.R")
 source("geospatial_data.R")
 
-# Serveur
+# Server
 server <- function(input, output, session) {
-  # Lire les fichiers nettoyés
+  # Read cleaned files
   airports <- read.csv("data/cleaned_airports.csv")
   flights <- read.csv("data/cleaned_flights.csv")
   planes <- read.csv("data/cleaned_planes.csv")
   weather <- read.csv("data/cleaned_weather.csv")
   airlines <- fromJSON("data/cleaned_airlines.json")
   
-  # Transformer les colonnes de temps en datetime
+  # Transform time columns to datetime
   flights <- transform_datetime(flights)
   
-  # Onglet Aéroports
+  # Aéroports tab
   output$airports_table <- renderDataTable({
     datatable(airports)
   })
@@ -37,27 +44,27 @@ server <- function(input, output, session) {
       )
   })
   
-  # Onglet Compagnies
+  # Compagnies tab
   output$airlines_table <- renderDataTable({
     datatable(as.data.frame(airlines))
   })
   
-  # Onglet Météo
+  # Météo tab
   output$weather_table <- renderDataTable({
     datatable(weather)
   })
   
-  # Onglet Avions
+  # Avions tab
   output$planes_table <- renderDataTable({
     datatable(planes)
   })
   
-  # Onglet Vols
+  # Vols tab
   output$flights_table <- renderDataTable({
     datatable(flights)
   })
   
-  # Onglet Graphiques
+  # Graphiques tab
   output$custom_plot <- renderPlot({
     ggplot(flights, aes(x = air_time, y = distance)) +
       geom_point() +
@@ -139,6 +146,9 @@ server <- function(input, output, session) {
   })
   
   geospatialDataServer(input, output, session, flights, airports)
+  
+  # Prediction tab
+  callModule(predictionServer, "prediction")
 }
 
 shinyApp(ui = ui, server = server)
