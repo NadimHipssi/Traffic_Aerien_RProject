@@ -1,46 +1,47 @@
 # Traffic_Aerien_RProject
 
-This repository contains a comprehensive analysis and reporting application for air traffic data using R and Shiny.
+Ce dépôt contient une application complète d'analyse et de reporting des données du trafic aérien en utilisant R et Shiny.
 
-## Table of Contents
+## Table des Matières
 - [Traffic\_Aerien\_RProject](#traffic_aerien_rproject)
-  - [Table of Contents](#table-of-contents)
-  - [Project Overview](#project-overview)
-  - [Setup Instructions](#setup-instructions)
-  - [Data Cleaning and Preparation](#data-cleaning-and-preparation)
-    - [Database Dump](#database-dump)
-    - [Web Application](#web-application)
-      - [Overview](#overview)
-      - [Detailed Description of Tabs](#detailed-description-of-tabs)
-        - [Prediction Model](#prediction-model)
+  - [Table des Matières](#table-des-matières)
+  - [Présentation du Projet](#présentation-du-projet)
+  - [Instructions d'Installation](#instructions-dinstallation)
+  - [Nettoyage et Préparation des Données](#nettoyage-et-préparation-des-données)
+    - [Dump de la Base de Données](#dump-de-la-base-de-données)
+    - [Application Web](#application-web)
+      - [Aperçu](#aperçu)
+      - [Description Détaillée des Onglets](#description-détaillée-des-onglets)
+        - [Modèle de Prédiction](#modèle-de-prédiction)
+    - [Lien Vers Trello, Git, Powerpoint](#lien-vers-trello-git-powerpoint)
 
-## Project Overview
+## Présentation du Projet
 
-This project analyzes air traffic data to identify patterns, delays, and peak traffic times. The data is cleaned, stored in a SQL database, and visualized using a Shiny application for interactive reporting and analysis.
+Ce projet analyse les données du trafic aérien pour identifier des motifs, des retards et des pics de trafic. Les données sont nettoyées, stockées dans une base de données SQL, et visualisées à l'aide d'une application Shiny pour un reporting interactif et des analyses prédictives.
 
-## Setup Instructions
+## Instructions d'Installation
 
-1. **Clone the repository**:
+1. **Cloner le dépôt** :
     ```sh
     git clone https://github.com/NadimHipssi/Traffic_Aerien_RProject.git
     cd Traffic_Aerien_RProject
     ```
 
-2. **Build and run the Docker container**:
+2. **Construire et lancer le conteneur Docker** :
     ```sh
     docker-compose up --build
     ```
 
-3. **Access the Shiny application**:
-    Open your browser and go to `http://localhost:3838` to access the application.
+3. **Accéder à l'application Shiny** :
+    Ouvrez votre navigateur et allez sur `http://localhost:3838` pour accéder à l'application.
 
-## Data Cleaning and Preparation
+## Nettoyage et Préparation des Données
 
-The `clean.ipynb` script cleans and prepares the dataset for SQL database injection.
+Le script `clean.ipynb` nettoie et prépare le jeu de données pour l'injection dans la base de données SQL.
 
-### Database Dump
+### Dump de la Base de Données
 
-In the `dump_database` folder, there is a file named `traffic_aerien_db.sql`. This file contains SQL commands to create and populate the database with cleaned data. It includes the schema and data for the following five (cleaned) tables:
+Dans le dossier `dump_database`, il y a un fichier nommé `traffic_aerien_db.sql`. Ce fichier contient les commandes SQL pour créer et peupler la base de données avec les données nettoyées. Il inclut le schéma et les données pour les cinq tables suivantes (nettoyées) :
 
 1. **Flights**
 2. **Airports**
@@ -48,66 +49,63 @@ In the `dump_database` folder, there is a file named `traffic_aerien_db.sql`. Th
 4. **Planes**
 5. **Weather**
 
-### Web Application
+### Application Web
 
-The web application is built using Shiny and provides an interactive interface for reporting and predictive analysis of air traffic data. Below is an overview of the various tabs and their functionalities.
+L'application web est construite en utilisant Shiny et fournit une interface interactive pour le reporting et l'analyse prédictive des données du trafic aérien. Voici un aperçu des différents onglets et de leurs fonctionnalités.
 
-#### Overview
+#### Aperçu
 
-The application is divided into several tabs, each focusing on a specific aspect of the air traffic data analysis:
+L'application est divisée en plusieurs onglets, chacun se concentrant sur un aspect spécifique de l'analyse des données du trafic aérien :
 
-1. **Familiarization**
-2. **Delay Analysis**
-   - Departure Delays
-   - Arrival Delays
-3. **Traffic Peak**
-4. **Predictive Analysis**
+1. **Familiarisation**
+2. **Analyse des Retards**
+   - Retards au Départ
+   - Retards à l'Arrivée
+3. **Pics de Trafic**
+4. **Analyse Prédictive**
 
-#### Detailed Description of Tabs
+#### Description Détaillée des Onglets
 
-1. **Familiarization**
+1. **Familiarisation**
 
-    - **Objective**: To give users an overview of the dataset.
-    - **Features**:
-        - **Data Summary**: Displays key statistics such as the number of flights, average delay, and other summary statistics.
-        - **Data Table**: Shows a sample of the dataset in a table format for quick inspection.
+    - **Objectif** : Donner aux utilisateurs un aperçu du jeu de données.
+    - **Fonctionnalités** :
+        - **Résumé des Données** : Affiche des statistiques clés telles que le nombre de vols, le retard moyen, et d'autres statistiques récapitulatives.
+        - **Tableau de Données** : Montre un échantillon du jeu de données sous forme de tableau pour une inspection rapide.
 
-2. **Delay Analysis**
+2. **Analyse des Retards**
 
-    - **Objective**: To analyze delays in air traffic, both at departure and arrival.
-    - **Sub-tabs**:
-        - **Departure Delays**:
-            - **Average Delay by Carrier**: Bar chart showing the average departure delay per airline.
-            - **Delay Distribution**: Histogram showing the distribution of departure delays.
-        - **Arrival Delays**:
-            - **Average Delay by Carrier**: Bar chart showing the average arrival delay per airline.
-            - **Delay Distribution**: Histogram showing the distribution of arrival delays.
+    - **Objectif** : Analyser les retards dans le trafic aérien, tant au départ qu'à l'arrivée.
+    - **Sous-onglets** :
+        - **Retards au Départ** :
+            - **Retard Moyen par Compagnie** : Diagramme en barres montrant le retard moyen au départ par compagnie aérienne.
+            - **Distribution des Retards** : Histogramme montrant la distribution des retards au départ.
+        - **Retards à l'Arrivée** :
+            - **Retard Moyen par Compagnie** : Diagramme en barres montrant le retard moyen à l'arrivée par compagnie aérienne.
+            - **Distribution des Retards** : Histogramme montrant la distribution des retards à l'arrivée.
 
-3. **Traffic Peak**
+3. **Pics de Trafic**
 
-    - **Objective**: To identify peak traffic periods.
-    - **Features**:
-        - **Hourly Traffic**: Line chart showing the number of flights per hour.
-        - **Daily Traffic**: Line chart showing the number of flights per day of the week.
-        - **Monthly Traffic**: Line chart showing the number of flights per month.
+    - **Objectif** : Identifier les périodes de pic de trafic.
+    - **Fonctionnalités** :
+        - **Trafic Horaire** : Diagramme en ligne montrant le nombre de vols par heure.
+        - **Trafic Quotidien** : Diagramme en ligne montrant le nombre de vols par jour de la semaine.
+        - **Trafic Mensuel** : Diagramme en ligne montrant le nombre de vols par mois.
 
-4. **Predictive Analysis**
+4. **Analyse Prédictive**
 
-    - **Objective**: To provide predictive insights using the available data.
-    - **Features**:
-        - **Delay Prediction**: A model to predict flight delays based on historical data.
-        - **Feature Importance**: Bar chart showing the importance of different features in the prediction model.
+    - **Objectif** : Fournir des insights prédictifs à partir des données disponibles.
+    - **Fonctionnalités** :
+        - **Prédiction des Retards** : Un modèle pour prédire les retards de vols basés sur des données historiques.
+        - **Importance des Variables** : Diagramme en barres montrant l'importance des différentes variables dans le modèle de prédiction.
 
+##### Modèle de Prédiction
 
-##### Prediction Model
+- **Prédiction des Retards de Vols** : Cet onglet permet aux utilisateurs de saisir les détails du vol tels que le retard au départ, la compagnie, l'origine, la destination, les détails de la date et de l'heure, et d'autres paramètres spécifiques au vol pour prédire si un vol sera retardé ou non.
+- **Résultats de la Prédiction** : Affiche le résultat de la prédiction sous forme de résultat binaire où 1 indique un retard et 0 indique aucun retard.
 
-- **Flight Delay Prediction:** This tab allows users to input flight details such as departure delay, carrier, origin, destination, date and time details, and other flight-specific parameters to predict if a flight will be delayed or not.
-- **Prediction Results:** Displays the prediction result as a binary outcome where 1 indicates a delay and 0 indicates no delay.
+### Lien Vers Trello, Git, Powerpoint
 
-
----
-
-For further details on setting up and running the web application, refer to the [Setup Instructions](#setup-instructions) section above.
-
-
-
+- [Lien vers le git](https://github.com/NadimHipssi/Traffic_Aerien_RProject)
+- [Lien vers le Trello](https://trello.com/invite/b/3EqL5UvW/ATTIee36219c9e8bd9f7ce9ee86b7f58bba8EDA39755/traffic-aerien)
+- [Lien vers le PowerPoint](https://view.genially.com/652511638718a5001161f794/guide-traffic-aerien)
